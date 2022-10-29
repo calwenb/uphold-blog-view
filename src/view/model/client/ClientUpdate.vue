@@ -37,8 +37,8 @@
   </el-dialog>
 </template>
 <script>
-import eventBus from "../../../js/eventBus";
 import Global from "../../../js/global";
+import vm from "../../../main";
 
 export default {
   data() {
@@ -48,7 +48,7 @@ export default {
     }
   },
   created() {
-    eventBus.$on("clientUpdate", data => {
+    vm.$on("clientUpdate", data => {
       this.form = data;
       this.show = true;
     })

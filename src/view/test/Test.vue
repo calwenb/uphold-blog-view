@@ -7,8 +7,6 @@
 </template>
 <script>
 
-import Global from "../../js/global";
-
 export default {
   name: "",
   data() {

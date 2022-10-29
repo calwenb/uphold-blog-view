@@ -4,8 +4,8 @@
     <!--左导航栏-->
     <el-aside width="200px" style="background-color: #F9F9F9">
       <!--管理员页面-->
-      <admin-nav-left :user="user" v-if="user.userType=== 0 || user.userType=== 1"/>
-      <navLeft :user="user" v-else/>
+<!--      <admin-nav-left :user="user" v-if="user.userType=== 0 || user.userType=== 1"/>-->
+      <navLeft :user="user" />
     </el-aside>
 
     <el-container>
@@ -30,6 +30,7 @@
 import NavHead from "../components/nav/NavHead";
 import NavLeft from "../components/nav/NavLeft";
 import Global from "../js/global";
+import comm from "../js/comm/comm";
 
 export default {
   name: "Index",
@@ -43,8 +44,8 @@ export default {
       hoursTip: "",
       user: {
         userId: '',
-        loginName: '',
-        userName: '',
+        account: '',
+        name: '',
         userType: '9',
         email: '',
         phoneNumber: '',
@@ -69,11 +70,11 @@ export default {
       }
       const that = vm;
       this.axios({
-        url: Global.SERVER_ADDRESS + '/users/info/' + token,
+        url: Global.SERVER_ADDRESS + '/auths/user/info',
         method: 'GET',
       }).then(function (rs) {
         that.user = rs.data;
-        that.successMsg("尊敬的 用户: " + that.user.userName + that.hoursTip);
+        comm.successMsg("尊敬的 用户: " + that.user.name + that.hoursTip);
       })
     }
   },

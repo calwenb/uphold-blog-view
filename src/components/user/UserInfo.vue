@@ -9,7 +9,7 @@
           <i class="el-icon-user"></i>
           用户名
         </template>
-        {{ user.userName }}
+        {{ user.name }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
@@ -49,7 +49,9 @@
 </template>
 
 <script>
-import eventBus from "../../js/eventBus";
+
+
+import vm from "../../main";
 
 export default {
   data() {
@@ -59,7 +61,7 @@ export default {
     }
   },
   created() {
-    eventBus.$on("userInfo", data => {
+    vm.$on("userInfo", data => {
       this.user = data;
       this.show = true;
     });

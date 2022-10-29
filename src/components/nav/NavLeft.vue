@@ -71,7 +71,6 @@
 
 <script>
 import logoL from "../../img/logo_l.png";
-import Global from "../../js/global";
 
 export default {
   name: "NavLeft",

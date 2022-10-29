@@ -10,7 +10,7 @@
                <el-image :src="avatarUrl"/>
             </el-avatar>
             <span class="mobileHide">
-              <span>{{ user.userName }}</span>
+              <span>{{ user.name }}</span>
             </span>
           </span>
           <el-dropdown-menu slot="dropdown">
@@ -51,9 +51,9 @@
 
 <script>
 
-import eventBus from "../../js/eventBus";
 import UserUpdate from "../user/UserUpdate";
 import UserInfo from "../user/UserInfo";
+import vm from "../../main";
 
 export default {
   name: "NavHead",
@@ -67,11 +67,11 @@ export default {
   methods: {
     handleCommand(command) {
       if (command === 'userInfo') {
-        eventBus.$emit("userInfo", this.user);
+        vm.$emit("userInfo", this.user);
       } else if (command === "updateUser") {
-        eventBus.$emit("userUpdate", this.user);
+        vm.$emit("userUpdate", this.user);
       } else if (command === "updatepwd") {
-        eventBus.$emit("userPwdUpdate", this.user);
+        vm.$emit("userPwdUpdate", this.user);
       } else if (command === "outLogin") {
         this.$cookies.remove("TOKEN");
         this.$router.push('/login');

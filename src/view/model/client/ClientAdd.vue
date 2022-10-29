@@ -36,7 +36,7 @@
 </template>
 <script>
 import Global from "../../../js/global";
-import eventBus from "../../../js/eventBus";
+import vm from "../../../main";
 
 export default {
   data() {
@@ -46,7 +46,7 @@ export default {
     }
   },
   created() {
-    eventBus.$on("clientAdd", data => {
+    vm.$on("clientAdd", data => {
       this.show = true;
     })
   },

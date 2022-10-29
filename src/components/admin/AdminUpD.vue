@@ -6,7 +6,7 @@
     class="pwdDialog">
     <el-form :model="form" status-icon ref="form" label-width="100px" class="demo-ruleForm">
       <el-form-item label="昵称">
-        <el-input v-model="form.userName"></el-input>
+        <el-input v-model="form.name"></el-input>
       </el-form-item>
       <el-form-item label="账号">
         <el-input v-model="form.loginName"></el-input>
@@ -49,7 +49,7 @@ export default {
       userDialog: false,
       userId: '',
       form: {
-        userName: '',
+        name: '',
         loginName: '',
         password: '',
         userType: '',
@@ -64,7 +64,7 @@ export default {
       this.axios({
         url: Global.SERVER_ADDRESS + '/admin/user/' + that.userId,
         params: {
-          userName: that.form.userName,
+          name: that.form.name,
           loginName: that.form.loginName,
           password: that.form.password,
           userType: that.form.userType,
@@ -84,7 +84,7 @@ export default {
       if (data != null) {
         this.userDialog = true;
         this.userId = data.userId;
-        this.form.userName = data.userName;
+        this.form.name = data.name;
         this.form.loginName = data.loginName;
         this.form.userType = data.userType;
         this.form.email = data.email;

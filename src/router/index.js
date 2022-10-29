@@ -27,7 +27,7 @@ export default new VueRouter({
       component: Repwd,
     },
     {
-      path: "/re_pwd/:loginName",
+      path: "/re_pwd/:account",
       component: Repwd,
     },
     {

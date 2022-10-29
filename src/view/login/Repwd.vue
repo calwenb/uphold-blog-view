@@ -23,8 +23,8 @@
 
       <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
 
-        <el-form-item label="账号" prop="loginName">
-          <el-input v-model="ruleForm.loginName"></el-input>
+        <el-form-item label="账号" prop="account">
+          <el-input v-model="ruleForm.account"></el-input>
         </el-form-item>
 
         <el-form-item label="邮箱" prop="email">
@@ -90,7 +90,7 @@ export default {
     return {
       verifyCode: "",
       ruleForm: {
-        loginName: '',
+        account: '',
         email: '',
         code: '',
         pass: '',
@@ -113,7 +113,7 @@ export default {
       this.axios({
         url: Global.SERVER_ADDRESS + '/users/send-code',
         params: {
-          loginName: this.ruleForm.loginName,
+          account: this.ruleForm.account,
           email: this.ruleForm.email,
           password: this.ruleForm.pass
         },
@@ -125,7 +125,7 @@ export default {
       this.axios({
         url: Global.SERVER_ADDRESS + '/users/re-pwd',
         params: {
-          loginName: this.ruleForm.loginName,
+          account: this.ruleForm.account,
           password: this.ruleForm.pass,
           code: this.ruleForm.code
         },
@@ -152,9 +152,9 @@ export default {
     }
   },
   created() {
-    let loginName = this.$route.params.loginName;
-    if (loginName !== undefined) {
-      this.ruleForm.loginName = loginName;
+    let account = this.$route.params.account;
+    if (account !== undefined) {
+      this.ruleForm.account = account;
     }
   }
 }

@@ -7,7 +7,7 @@
         <el-input v-model="form.id" :disabled="true"></el-input>
       </el-form-item>
       <el-form-item label="客户名称">
-        <el-input v-model="form.userName"></el-input>
+        <el-input v-model="form.name"></el-input>
       </el-form-item>
       <el-form-item label="标题">
         <el-input v-model="form.title"></el-input>
@@ -29,8 +29,8 @@
   </el-dialog>
 </template>
 <script>
-import eventBus from "../../../js/eventBus";
 import Global from "../../../js/global";
+import vm from "../../../main";
 
 export default {
   data() {
@@ -40,7 +40,7 @@ export default {
     }
   },
   created() {
-    eventBus.$on("servingUpdate", data => {
+    vm.$on("servingUpdate", data => {
       this.form = data;
       this.show = true;
     })

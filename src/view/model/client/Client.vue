@@ -106,8 +106,8 @@
 <script>
 import Global from "../../../js/global";
 import ClientAdd from "./ClientAdd";
-import eventBus from "../../../js/eventBus";
 import clientUpdate from "./ClientUpdate";
+import vm from "../../../main";
 
 export default {
   components: {ClientAdd, clientUpdate},
@@ -121,10 +121,10 @@ export default {
   },
   methods: {
     add() {
-      eventBus.$emit("clientAdd")
+      vm.$emit("clientAdd")
     },
     update(row) {
-      eventBus.$emit("clientUpdate", row)
+      vm.$emit("clientUpdate", row)
     },
     refresh() {
       this.list = null;

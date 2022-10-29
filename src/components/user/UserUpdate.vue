@@ -6,7 +6,7 @@
       append-to-body>
       <el-form ref="form" :model="form" label-width="80px" style="padding: 0 15vh;">
         <el-form-item label="昵称">
-          <el-input v-model="form.userName"></el-input>
+          <el-input v-model="form.name"></el-input>
         </el-form-item>
         <el-form-item label="邮箱">
           <el-input v-model="form.email"></el-input>
@@ -38,8 +38,8 @@
 </template>
 
 <script>
-import eventBus from "../../js/eventBus";
 import Global from "../../js/global";
+import vm from "../../main";
 
 export default {
   name: "UpdateUser",
@@ -48,7 +48,7 @@ export default {
       userShow: false,
       pwdShow: false,
       form: {
-        userName: '',
+        name: '',
         email: '',
         phoneNumber: '',
       },
@@ -57,11 +57,11 @@ export default {
     }
   },
   created() {
-    eventBus.$on("userUpdate", data => {
+    vm.$on("userUpdate", data => {
       this.form = data;
       this.userShow = true;
     });
-    eventBus.$on("userPwdUpdate", data => {
+    vm.$on("userPwdUpdate", data => {
       this.form = data;
       this.pwdShow = true;
     });
@@ -69,14 +69,14 @@ export default {
   methods: {
     updateUser() {
       const that = this;
-      this.axios.put(Global.SERVER_ADDRESS + "/users/" + that.form.id, that.form)
+      this.axios.put(Global.SERVER_ADDRESS + "/auths/" + that.form.id, that.form)
         .then(rs => {
           this.successMsg("修改成功");
         })
     },
     updatePassword() {
       const that = this;
-      this.axios.put(Global.SERVER_ADDRESS + "/users/" + that.form.id + '/pdw', {
+      this.axios.put(Global.SERVER_ADDRESS + "/auths/" + that.form.id + '/pdw', {
         oldPwd: that.oldPassword,
         newPwd: that.newPassword
       }).then(rs => {

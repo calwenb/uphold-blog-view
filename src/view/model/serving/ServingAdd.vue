@@ -4,7 +4,7 @@
     :visible.sync="show">
     <el-form ref="form" :model="form" label-width="80px" style="padding: 0 15vh;">
       <el-form-item label="客户名称">
-        <el-input v-model="form.userName"></el-input>
+        <el-input v-model="form.name"></el-input>
       </el-form-item>
       <el-form-item label="标题">
         <el-input v-model="form.title"></el-input>
@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import eventBus from "../../../js/eventBus";
 import Global from "../../../js/global";
+import vm from "../../../main";
 
 export default {
   name: "ServingAdd",
@@ -39,7 +39,7 @@ export default {
     }
   },
   created() {
-    eventBus.$on("servingAdd", data => {
+    vm.$on("servingAdd", data => {
       this.show = true;
     })
   },

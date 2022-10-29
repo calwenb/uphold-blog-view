@@ -18,7 +18,7 @@
     <div class="table" v-loading="loading">
       <el-table
         :data="list.filter(data => !search
-        || data.userName.toLowerCase().includes(search.toLowerCase())
+        || data.name.toLowerCase().includes(search.toLowerCase())
         )"
         style="width: 100%;margin-bottom: 10%"
         :default-sort="{prop: 'date', order: 'descending'}">
@@ -31,7 +31,7 @@
         </el-table-column>
 
         <el-table-column
-          prop="userName"
+          prop="name"
           label="客户名称"
           sortable
           width="150">
@@ -105,10 +105,10 @@
 </template>
 
 <script>
-import eventBus from "../../../js/eventBus";
 import Global from "../../../js/global";
 import ServingAdd from "./ServingAdd";
 import ServingUpdate from "./ServingUpdate";
+import vm from "../../../main";
 
 export default {
   name: "Serving",
@@ -123,10 +123,10 @@ export default {
   },
   methods: {
     add() {
-      eventBus.$emit("servingAdd")
+      vm.$emit("servingAdd")
     },
     update(row) {
-      eventBus.$emit("servingUpdate", row)
+      vm.$emit("servingUpdate", row)
     },
     refresh() {
       this.list = null;

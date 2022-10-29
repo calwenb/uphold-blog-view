@@ -6,8 +6,8 @@
       :visible.sync="addDialog"
       class="pwdDialog">
       <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="昵称" prop="userName">
-          <el-input v-model="ruleForm.userName"></el-input>
+        <el-form-item label="昵称" prop="name">
+          <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
 
         <el-form-item label="账号" prop="loginName">
@@ -73,7 +73,7 @@ export default {
     return {
       ruleForm: {
         loginName: '',
-        userName: '',
+        name: '',
         email: '',
         pass: '',
         checkPass: '',
@@ -89,7 +89,7 @@ export default {
       },
       addDialog: false,
       /* form: {
-         userName: '',
+         name: '',
          email: '',
          phoneNumber: '',
        },*/
@@ -101,7 +101,7 @@ export default {
       this.axios({
         url: Global.SERVER_ADDRESS + '/admins',
         params: {
-          userName: this.ruleForm.userName,
+          name: this.ruleForm.name,
           loginName: this.ruleForm.loginName,
           password: this.ruleForm.pass,
           email: this.ruleForm.email,
