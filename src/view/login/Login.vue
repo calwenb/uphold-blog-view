@@ -43,9 +43,7 @@
           <el-tooltip content="使用手机短信一键登录" placement="top">
             <el-button @click="loginPhone">手机登录</el-button>
           </el-tooltip>
-
         </el-form-item>
-
       </el-form>
 
     </el-card>
@@ -108,7 +106,6 @@ export default {
   },
 
   created() {
-
     this.getBulletin();
   },
 
@@ -146,7 +143,7 @@ export default {
         } else {
           that.$cookies.set("TOKEN", rs.data, "Session");
         }
-        that.$router.push({path: '/index'});
+        that.$router.push({path: '/movie'});
       })
     },
   },

@@ -111,7 +111,7 @@ export default {
 
 .mv {
   width: 15vw;
-  height: 30vh;
+  height: 35vh;
   padding: 0.5vw;
   float: left;
   list-style: none;

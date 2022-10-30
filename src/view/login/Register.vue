@@ -117,7 +117,7 @@ export default {
         method: 'POST',
       }).then(function (rs) {
         that.$cookies.set("TOKEN", rs.data, Global.COOKIES_TIME);
-        that.$router.push({path: '/index'})
+        that.$router.push({path: '/movie'})
       })
     },
     submitForm(formName) {
