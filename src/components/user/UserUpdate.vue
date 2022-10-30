@@ -40,6 +40,7 @@
 <script>
 import Global from "../../js/global";
 import vm from "../../main";
+import eventBus from "../../js/eventBus";
 
 export default {
   name: "UpdateUser",
@@ -57,11 +58,11 @@ export default {
     }
   },
   created() {
-    vm.$on("userUpdate", data => {
+    eventBus.$on("userUpdate", data => {
       this.form = data;
       this.userShow = true;
     });
-    vm.$on("userPwdUpdate", data => {
+    eventBus.$on("userPwdUpdate", data => {
       this.form = data;
       this.pwdShow = true;
     });

@@ -52,6 +52,7 @@
 
 
 import vm from "../../main";
+import eventBus from "../../js/eventBus";
 
 export default {
   data() {
@@ -61,7 +62,7 @@ export default {
     }
   },
   created() {
-    vm.$on("userInfo", data => {
+    eventBus.$on("userInfo", data => {
       this.user = data;
       this.show = true;
     });

@@ -8,7 +8,7 @@
       text-color="#000000"
       active-text-color="#3C8CFF">
       <div>
-        <el-image class="pointer" :src="logoSrc" @click="$router.push('/index')"></el-image>
+        <el-image class="pointer" :src="logoSrc" @click="$router.push('/movie')"></el-image>
       </div>
 
       <el-menu-item index="1">
@@ -62,8 +62,6 @@
           </router-link>
         </span>
       </el-menu-item>
-
-
     </el-menu>
 
   </div>
