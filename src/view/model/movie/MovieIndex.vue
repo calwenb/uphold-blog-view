@@ -1,37 +1,45 @@
 <template>
   <div class="main">
-    <el-divider content-position="left"><h3>电影</h3></el-divider>
-    <!--    {{ type }}-->
+    <el-divider content-position="left">
+      <h3>电影</h3>
+    </el-divider>
     <div>
-      <span>类型：</span>
-
+      <el-row>类型：</el-row>
       <el-checkbox-group size="mini" class="check"
-                         v-model="checkType" @change="getList">
-        <el-checkbox-button v-for="t in type.type" :label="t" :key="t" >{{ t }}</el-checkbox-button>
+                         v-model="check.checkType" @change="getList">
+        <el-checkbox-button v-for="t in type.type" :label="t" :key="t">{{ t }}</el-checkbox-button>
       </el-checkbox-group>
 
-      <span>地区：</span>
+      <el-row>地区：</el-row>
       <el-checkbox-group size="mini" class="check"
-                         v-model="checkRegion" @change="getList">
+                         v-model="check.checkRegion" @change="getList">
         <el-checkbox-button v-for="r in type.region" :label="r" :key="r">{{ r }}</el-checkbox-button>
       </el-checkbox-group>
 
-      <span>语言：</span>
+      <el-row>语言：</el-row>
       <el-checkbox-group size="mini" class="check"
-                         v-model="checkLanguage" @change="getList">
+                         v-model="check.checkLanguage" @change="getList">
         <el-checkbox-button v-for="l in type.language" :label="l" :key="l">{{ l }}</el-checkbox-button>
       </el-checkbox-group>
+
+      <el-row>年代：</el-row>
+      <el-radio-group class="check" size="mini"
+                      v-model="check.checkYear" @change="getList">
+        <el-radio-button :label="y" v-for="y in yearsList"></el-radio-button>
+      </el-radio-group>
     </div>
     <div>
       <ul>
-        <li class="mv" v-for="mv in mvList">
+        <li class="mv" v-for="mv in page.content">
           <el-link :underline="false" :href="'/mv-detail/'+mv.id">
             <el-image class="mvImage" :src="mv.data"></el-image>
           </el-link>
           <el-row>
-            <el-link :underline="false" :href="'/mv-detail/'+mv.id">
-              {{ mv.name }}
-            </el-link>
+            <el-badge :value="mv.score" class="item">
+              <el-link :underline="false" :href="'/mv-detail/'+mv.id">
+                {{ mv.name }}
+              </el-link>
+            </el-badge>
           </el-row>
           <el-row>
             <span v-text="mv.releaseYear"></span>
@@ -39,7 +47,20 @@
           </el-row>
         </li>
       </ul>
+      <div style="float:left;">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="page.page"
+          :page-sizes="[20, 50, 100, 200]"
+          :page-size="page.size"
+          :total="page.total"
+          background
+          layout=" prev, pager, next, sizes,jumper,total">
+        </el-pagination>
+      </div>
     </div>
+
   </div>
 
 </template>
@@ -55,65 +76,88 @@ export default {
   data() {
     return {
       src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-      mvList: [],
-      type: {
-        type: ["全部"],
-        language: ["全部"],
-        region: ["全部"],
+      page: {
+        content: [],
+        page: 1,
+        size: 20,
+        total: 0,
       },
-      checkType: ["全部"],
-      checkLanguage: ["全部"],
-      checkRegion: ["全部"],
+      type: {
+        type: [],
+        language: [],
+        region: [],
+      },
+      yearsList: ["全部"],
+      check: {
+        checkType: [],
+        checkLanguage: [],
+        checkRegion: [],
+        checkYear: "全部",
+      },
     }
   },
   created() {
     this.getList();
     this.getType();
+    this.creatYearsList();
   },
   methods: {
+    creatYearsList() {
+      let date = new Date();
+      let year = date.getFullYear();
+      for (let i = 0; i < 20; i++) {
+        this.yearsList.push(year--);
+      }
+    },
+    handleSizeChange(val) {
+      this.page.size = val;
+      this.getList();
+    },
+    handleCurrentChange(val) {
+      this.page.page = val;
+      this.getList();
+    },
     getList() {
-      console.log(this.checkType)
-      axios.get(Global.SERVER_ADDRESS + "/movies/list",
+      axios.get(Global.SERVER_ADDRESS + "/movies/page",
         {
           params: {
-            typeList: this.checkType,
-            languageList: this.checkLanguage,
-            regionList: this.checkRegion,
-            dataType:"t",
+            typeList: this.check.checkType,
+            languageList: this.check.checkLanguage,
+            regionList: this.check.checkRegion,
+            releaseYear: this.check.checkYear,
+            dataType: "t",
+            pageNum: this.page.page,
+            pageSize: this.page.size,
           }
         }).then(rs => {
-        this.mvList = rs.data
+        this.page = rs.data
       })
     },
     getType() {
       axios.get(global.SERVER_ADDRESS + "/movies/type").then(rs => {
         this.type = rs.data;
-/*        this.type.type.unshift("全部");
-        this.type.language.unshift("全部");
-        this.type.region.unshift("全部");*/
       })
     }
   }
-
 }
 </script>
 
 <style scoped>
+.mv {
+  width: 13vw;
+  height: 35vh;
+  padding: 0.5vw;
+  float: left;
+  list-style: none;
+}
+
 .mvImage {
-  width: 15vw;
+  width: 13vw;
   height: 30vh;
 }
 
 .check {
   width: 70vw;
   padding-left: 2vw;
-}
-
-.mv {
-  width: 15vw;
-  height: 35vh;
-  padding: 0.5vw;
-  float: left;
-  list-style: none;
 }
 </style>

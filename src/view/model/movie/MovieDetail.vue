@@ -32,10 +32,28 @@
           </el-input>
           <el-button @click="copy(resource.resourceLink)" icon="el-icon-copy-document"/>
         </el-collapse-item>
-
       </el-collapse>
-
-
+    </div>
+    <el-divider content-position="left">推荐</el-divider>
+    <div class="recommend">
+      <ul>
+        <li class="recommendMv" v-for="mv in recommend">
+          <el-link :underline="false" :href="'/mv-detail/'+mv.id">
+            <el-image class="recommendImage" :src="mv.data"></el-image>
+          </el-link>
+          <el-row>
+            <el-badge :value="mv.score" class="item">
+              <el-link :underline="false" :href="'/mv-detail/'+mv.id">
+                {{ mv.name }}
+              </el-link>
+            </el-badge>
+          </el-row>
+          <el-row>
+            <span v-text="mv.releaseYear"></span>
+            <span v-text="mv.type"></span>
+          </el-row>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -52,6 +70,7 @@ export default {
     return {
       id: '',
       mv: {},
+      recommend: {},
       resources: '',
       src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
     }
@@ -63,9 +82,15 @@ export default {
       this.id = id;
       this.getMv();
       this.getResource();
+      this.getRecommend();
     }
   },
   methods: {
+    getRecommend() {
+      axios.get(Global.SERVER_ADDRESS + "/movies/recommend/" + this.id).then(rs => {
+        this.recommend = rs.data;
+      })
+    },
     getMv() {
       axios.get(Global.SERVER_ADDRESS + "/movies/" + this.id + "/o").then(rs => {
         this.mv = rs.data;
@@ -92,6 +117,20 @@ export default {
 </script>
 
 <style scoped>
+.recommendMv {
+  width: 8vw;
+  height: 20vh;
+  padding: 0.5vw;
+  float: left;
+  list-style: none;
+}
+
+.recommendImage {
+  width: 8vw;
+  height: 15vh;
+}
+
+
 .mvImage {
   width: 20vw;
 }
@@ -102,6 +141,6 @@ export default {
 
 .resource {
   padding: 0vw;
-
 }
+
 </style>

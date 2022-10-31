@@ -11,7 +11,7 @@
       <ul>
         <li class="mv" v-for="mv in mvList">
           <el-link :underline="false" :href="'/mv-detail/'+mv.id">
-            <el-image class="mvImage" :src="src"></el-image>
+            <el-image class="mvImage" :src="mv.data"></el-image>
           </el-link>
           <el-row>
             <el-link :underline="false" :href="'/mv-detail/'+mv.id">
@@ -58,7 +58,7 @@ export default {
     getList() {
       let time = new Date();
       axios.get(Global.SERVER_ADDRESS + "/movies/list", {
-        params: {"keyword": this.keyword}
+        params: {"keyword": this.keyword,dataType:'t'}
       }).then(rs => {
         this.mvList = rs.data
         console.log(this.mvList)
@@ -82,15 +82,15 @@ export default {
 </script>
 
 <style scoped>
-.mvImage {
-  width: 15vw;
-}
-
 .mv {
   width: 15vw;
-  height: 25vh;
+  height: 35vh;
   padding: 0.5vw;
   float: left;
   list-style: none;
+}
+.mvImage {
+  width: 15vw;
+  height: 30vh;
 }
 </style>
