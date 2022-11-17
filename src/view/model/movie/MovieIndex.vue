@@ -22,11 +22,11 @@
         <el-checkbox-button v-for="l in type.language" :label="l" :key="l">{{ l }}</el-checkbox-button>
       </el-checkbox-group>
 
-      <el-row>年代：</el-row>
+<!--      <el-row>年代：</el-row>
       <el-radio-group class="check" size="mini"
                       v-model="check.checkYear" @change="getList">
         <el-radio-button :label="y" v-for="y in yearsList"></el-radio-button>
-      </el-radio-group>
+      </el-radio-group>-->
     </div>
     <div>
       <ul>
@@ -118,7 +118,7 @@ export default {
       this.getList();
     },
     getList() {
-      axios.get(Global.SERVER_ADDRESS + "/movies/page",
+      axios.get(Global.SERVER + "/movies/page",
         {
           params: {
             typeList: this.check.checkType,
@@ -134,7 +134,7 @@ export default {
       })
     },
     getType() {
-      axios.get(global.SERVER_ADDRESS + "/movies/type").then(rs => {
+      axios.get(global.SERVER + "/movies/type").then(rs => {
         this.type = rs.data;
       })
     }

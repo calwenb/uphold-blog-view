@@ -1,17 +1,13 @@
 import axios from "axios";
 import VueCookies from "vue-cookies";
-import vm from "../main.js";
 import router from "../router";
 import comm from "./comm/comm";
 
 axios.defaults.withCredentials = true;
 export default axios;
-
-
 export const request = (config) => {
   return axios(config)
 }
-
 
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {

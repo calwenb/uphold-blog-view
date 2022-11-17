@@ -107,7 +107,7 @@ export default {
     register() {
       var that = this;
       this.axios({
-        url: Global.SERVER_ADDRESS + '/auths/register',
+        url: Global.SERVER + '/auths/register',
         data: {
           name: this.form.name,
           email: this.form.email,

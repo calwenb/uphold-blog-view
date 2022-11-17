@@ -57,7 +57,7 @@ export default {
   methods: {
     getList() {
       let time = new Date();
-      axios.get(Global.SERVER_ADDRESS + "/movies/list", {
+      axios.get(Global.SERVER + "/movies/list", {
         params: {"keyword": this.keyword,dataType:'t'}
       }).then(rs => {
         this.mvList = rs.data

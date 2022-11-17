@@ -70,14 +70,14 @@ export default {
   methods: {
     updateUser() {
       const that = this;
-      this.axios.put(Global.SERVER_ADDRESS + "/auths/" + that.form.id, that.form)
+      this.axios.put(Global.SERVER + "/auths/" + that.form.id, that.form)
         .then(rs => {
           this.successMsg("修改成功");
         })
     },
     updatePassword() {
       const that = this;
-      this.axios.put(Global.SERVER_ADDRESS + "/auths/" + that.form.id + '/pdw', {
+      this.axios.put(Global.SERVER + "/auths/" + that.form.id + '/pdw', {
         oldPwd: that.oldPassword,
         newPwd: that.newPassword
       }).then(rs => {

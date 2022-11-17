@@ -129,7 +129,7 @@ export default {
     submitForm(formName) {
       let that = this;
       this.axios({
-        url: Global.SERVER_ADDRESS + '/auths/login',
+        url: Global.SERVER + '/auths/login',
         data: {
           account: this.form.account,
           password: this.form.pass,

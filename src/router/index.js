@@ -9,6 +9,9 @@ import Index from "../view";
 import movieIndex from "../view/model/movie/MovieIndex";
 import movieDetail from "../view/model/movie/MovieDetail";
 import movieSearch from "../view/model/movie/MovieSearch";
+import blogIndex from "../view/model/blog/BlogIndex";
+import blogDetail from "../view/model/blog/BlogDetail";
+import blogEdit from "../view/model/blog/BlogEdit";
 
 Vue.use(VueRouter);
 export default new VueRouter({
@@ -40,17 +43,19 @@ export default new VueRouter({
       component: Index,
       children: [
         {
-          path: "/mv",
-          component: movieIndex,
+          path: "/blog",
+          component: blogIndex,
         },
         {
-          path: "/mv-detail/:id",
-          component: movieDetail,
+          path: "/blog-detail/:id",
+          component: blogDetail,
         },
         {
-          path: "/mv-s",
-          component: movieSearch,
+          path: "/blog/md",
+          component: blogEdit,
         },
+
+
       ]
     },
     {

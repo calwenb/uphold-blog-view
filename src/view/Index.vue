@@ -62,7 +62,7 @@ export default {
       }
       const that = vm;
       this.axios({
-        url: Global.SERVER_ADDRESS + '/auths/user/info',
+        url: Global.SERVER + '/auths/user/info',
         method: 'GET',
       }).then(function (rs) {
         that.user = rs.data;

@@ -111,7 +111,7 @@ export default {
     sendCode() {
       var that = this;
       this.axios({
-        url: Global.SERVER_ADDRESS + '/users/send-code',
+        url: Global.SERVER + '/users/send-code',
         params: {
           account: this.ruleForm.account,
           email: this.ruleForm.email,
@@ -123,7 +123,7 @@ export default {
     repwd() {
       var that = this;
       this.axios({
-        url: Global.SERVER_ADDRESS + '/users/re-pwd',
+        url: Global.SERVER + '/users/re-pwd',
         params: {
           account: this.ruleForm.account,
           password: this.ruleForm.pass,

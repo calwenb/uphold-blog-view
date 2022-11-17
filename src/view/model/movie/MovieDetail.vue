@@ -87,17 +87,17 @@ export default {
   },
   methods: {
     getRecommend() {
-      axios.get(Global.SERVER_ADDRESS + "/movies/recommend/" + this.id).then(rs => {
+      axios.get(Global.SERVER + "/movies/recommend/" + this.id).then(rs => {
         this.recommend = rs.data;
       })
     },
     getMv() {
-      axios.get(Global.SERVER_ADDRESS + "/movies/" + this.id + "/o").then(rs => {
+      axios.get(Global.SERVER + "/movies/" + this.id + "/o").then(rs => {
         this.mv = rs.data;
       })
     },
     getResource() {
-      axios.get(Global.SERVER_ADDRESS + "/resources/list",
+      axios.get(Global.SERVER + "/resources/list",
         {params: {"targetId": this.id}}
       ).then(rs => {
         this.resources = rs.data;

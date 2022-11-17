@@ -13,8 +13,10 @@ import VueCookies from "vue-cookies";
 import './assets/css/mobile.css'; // 全局css
 import Contextmenu from "vue-contextmenujs"
 import uploader from 'vue-simple-uploader'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 
-
+Vue.use(mavonEditor)
 Vue.use(Contextmenu);
 Vue.config.productionTip = false
 Vue.use(ElementUI);

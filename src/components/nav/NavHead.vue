@@ -1,18 +1,18 @@
 <template>
   <el-row type="flex" justify="center">
-    <el-image class="pointer logo" :src="logoSrc" @click="$router.push('/movie')"></el-image>
+
 
     <el-menu default-active="1" mode="horizontal" @select="handleSelect">
+      <el-menu-item index="0">
+        <el-image class="pointer logo" :src="logoSrc" @click="$router.push('/movie')"/>
+      </el-menu-item>
       <el-menu-item index="1">首页</el-menu-item>
-      <el-menu-item index="2">电影</el-menu-item>
-      <el-menu-item index="3">订单</el-menu-item>
-    </el-menu>
-
-    <Search/>
-
-    <!--用户信息-->
-    <el-col :xs="4" :md="4">
-      <el-dropdown trigger="click" @command="handleCommand">
+      <el-menu-item index="2">标签</el-menu-item>
+      <el-menu-item index="3">分类</el-menu-item>
+      <el-menu-item index="4">碎语</el-menu-item>
+      <el-menu-item index="5">发布</el-menu-item>
+      <el-menu-item index="6">
+        <el-dropdown trigger="click" @command="handleCommand">
             <span class="el-dropdown-link">
               <el-avatar :size="45">
                  <el-image :src="avatarUrl"/>
@@ -21,34 +21,77 @@
                 <span>{{ user.name }}</span>
               </span>
             </span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="userInfo">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-yanzhengma"></use>
-            </svg>
-            个人信息
-          </el-dropdown-item>
-          <el-dropdown-item command="updateUser">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-bianji4"></use>
-            </svg>
-            修改信息
-          </el-dropdown-item>
-          <el-dropdown-item command="updatepwd">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-yanzhengma"></use>
-            </svg>
-            修改密码
-          </el-dropdown-item>
-          <el-dropdown-item command="outLogin">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-tuichudenglu"></use>
-            </svg>
-            退出登录
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-    </el-col>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="userInfo">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-yanzhengma"></use>
+              </svg>
+              个人信息
+            </el-dropdown-item>
+            <el-dropdown-item command="updateUser">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-bianji4"></use>
+              </svg>
+              修改信息
+            </el-dropdown-item>
+            <el-dropdown-item command="updatepwd">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-yanzhengma"></use>
+              </svg>
+              修改密码
+            </el-dropdown-item>
+            <el-dropdown-item command="outLogin">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-tuichudenglu"></use>
+              </svg>
+              退出登录
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </el-menu-item>
+    </el-menu>
+
+    <!--    <Search/>-->
+
+    <!--用户信息-->
+    <!--    <el-col :xs="4" :md="4">
+          <el-dropdown trigger="click" @command="handleCommand">
+                <span class="el-dropdown-link">
+                  <el-avatar :size="45">
+                     <el-image :src="avatarUrl"/>
+                  </el-avatar>
+                  <span class="mobileHide">
+                    <span>{{ user.name }}</span>
+                  </span>
+                </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="userInfo">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-yanzhengma"></use>
+                </svg>
+                个人信息
+              </el-dropdown-item>
+              <el-dropdown-item command="updateUser">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-bianji4"></use>
+                </svg>
+                修改信息
+              </el-dropdown-item>
+              <el-dropdown-item command="updatepwd">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-yanzhengma"></use>
+                </svg>
+                修改密码
+              </el-dropdown-item>
+              <el-dropdown-item command="outLogin">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-tuichudenglu"></use>
+                </svg>
+                退出登录
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </el-col>-->
     <user-info/>
     <user-update/>
   </el-row>
@@ -78,7 +121,7 @@ export default {
       console.log(key)
       switch (key) {
         case "1":
-          router.push('/mv');
+          router.push('/blog');
           break;
         case "2":
           console.log(1);
@@ -88,6 +131,9 @@ export default {
           break;
         case "4":
           console.log(1);
+          break;
+        case "5":
+          router.push('/blog/md');
           break;
         default:
           console.log("错误选择")
@@ -119,7 +165,7 @@ export default {
 }
 
 .logo {
-  width: 5vw;
-  height: 7vh;
+  width: 50px;
+  height: 50px;
 }
 </style>
