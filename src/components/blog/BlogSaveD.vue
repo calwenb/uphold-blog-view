@@ -7,8 +7,7 @@
       :action="uploadUrl"
       list-type="picture-card"
       :on-preview="handlePictureCardPreview"
-      :on-success="onSuccess"
-      :headers="headerObj">
+      :on-success="onSuccess">
       <i class="el-icon-plus"></i>
     </el-upload>
 
@@ -22,7 +21,15 @@
       </el-form-item>
 
       <el-form-item label="标签">
-        <el-input v-model="tag" @keyup.enter.native="addTag"></el-input>
+        <el-autocomplete
+          class="inline-input"
+          v-model="tag"
+          :fetch-suggestions="querySearch"
+          placeholder="请输入内容"
+          :trigger-on-focus="false"
+          @keyup.enter.native="addTag"
+          @select="handleSelect">
+        </el-autocomplete>
         <el-tag v-for="tag in form.tagList" :key="tag" size="mini">{{ tag }}</el-tag>
       </el-form-item>
       <el-form-item label="公开">
@@ -42,6 +49,7 @@ import eventBus from "../../js/eventBus";
 import axios from "../../js/axios";
 import global from "../../js/global";
 import {errorMsg, successMsg} from "../../js/comm/comm";
+import {Axios} from "axios";
 
 export default {
   name: "BlogSaveD",
@@ -49,28 +57,46 @@ export default {
     return {
       show: false,
       form: {},
-      tag: '',
-      uploadUrl: global.SERVER + "/files/upload-img",
-      headerObj: {Authorization: this.$cookies.get("TOKEN")},
+      tag: [],
+      uploadUrl: global.SERVER + "/files/upload",
       dialogImageUrl: "",
-      dialogVisible: false
+      dialogVisible: false,
+      tagEnum: [],
     }
   },
   created() {
     eventBus.$on("BlogSaveD", data => {
       this.form = data;
       this.show = true;
+      this.getTagEnum();
     });
   },
   methods: {
+    handleSelect(item) {
+      console.log(item);
+    },
+    querySearch(queryStr, cb) {
+      var tagEnum = this.tagEnum;
+      var results = queryStr ? tagEnum.filter(this.createFilter(queryStr)) : tagEnum;
+      console.log(results)
+      cb(results);
+    },
+    createFilter(queryStr) {
+      return (tag) => {
+        return (tag.toLowerCase().indexOf(queryStr.toLowerCase()) === 0);
+      };
+    },
     onSuccess(res, file) {
       this.form.imgUrl = res.data;
     },
-
     handlePictureCardPreview(file) {
       this.dialogImageUrl = global.SERVER + "/files" + file.url;
       this.dialogVisible = true;
-
+    },
+    getTagEnum() {
+      axios.get(global.SERVER + "/blogs/tag/enum").then(rs => {
+        this.tagEnum = rs.data;
+      })
     },
     addTag() {
       if (this.tag != "") {

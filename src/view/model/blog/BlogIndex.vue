@@ -4,13 +4,21 @@
       <el-card class="blog" shadow="hover" v-for="(blog,i) in data.content" :key="blog">
         <div v-if="i%2===0" style="float: left;">
           <el-link :underline="false" :href="'/blog-detail/'+blog.id">
-            <el-image class="blogImage" :src="imgServer+'?url='+blog.imgUrl"></el-image>
+            <el-image class="blogImage" :src="imgServer+blog.imgUrl">
+              <div slot="error" class="image-slot">
+                <el-image class="blogImage" :src="defaultImg"/>
+              </div>
+            </el-image>
           </el-link>
         </div>
 
         <div v-else style="float: right;">
           <el-link :underline="false" :href="'/blog-detail/'+blog.id">
-            <el-image class="blogImage" :src="imgServer+'?url='+blog.imgUrl"></el-image>
+            <el-image class="blogImage" :src="imgServer+blog.imgUrl">
+              <div slot="error" class="image-slot">
+                <el-image class="blogImage" :src="defaultImg"/>
+              </div>
+            </el-image>
           </el-link>
         </div>
 
@@ -39,12 +47,13 @@
 <script>
 import axios from "axios";
 import global from "../../../js/global";
+import eventBus from "../../../js/eventBus";
 
 export default {
   data() {
     return {
-      imgServer: global.SERVER + "/files",
-      src: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
+      imgServer: global.SERVER + "/files/",
+      defaultImg: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
       data: {
         content: [],
         page: 1,
@@ -54,16 +63,18 @@ export default {
     }
   },
   created() {
-    this.getList();
+    // eventBus.$off("blogQuery")
+    // eventBus.$on("blogQuery", data => {
+    //   this.getList(data);
+    // });
+    this.getList({});
   },
   methods: {
-    getList() {
-      axios.get(global.SERVER + "/blogs/page", {
-        params: {
-          pageNum: this.data.page,
-          PageSize: this.data.size,
-        }
-      }).then(rs => {
+    getList(query) {
+      query["pageNum"] = this.data.page;
+      query["PageSize"] = this.data.size;
+      console.log(query)
+      axios.get(global.SERVER + "/blogs/page", {params: query}).then(rs => {
         this.data = rs.data;
       })
     },

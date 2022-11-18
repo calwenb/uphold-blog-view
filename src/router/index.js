@@ -7,11 +7,10 @@ import Repwd from "../view/login/Repwd";
 import Test from "../view/test/Test";
 import Index from "../view";
 import movieIndex from "../view/model/movie/MovieIndex";
-import movieDetail from "../view/model/movie/MovieDetail";
-import movieSearch from "../view/model/movie/MovieSearch";
 import blogIndex from "../view/model/blog/BlogIndex";
 import blogDetail from "../view/model/blog/BlogDetail";
 import blogEdit from "../view/model/blog/BlogEdit";
+import TagList from "../view/model/blog/TagList";
 
 Vue.use(VueRouter);
 export default new VueRouter({
@@ -51,10 +50,17 @@ export default new VueRouter({
           component: blogDetail,
         },
         {
+          path: "/blog/md/:id",
+          component: blogEdit,
+        },
+        {
           path: "/blog/md",
           component: blogEdit,
         },
-
+        {
+          path: "/tag",
+          component: TagList,
+        },
 
       ]
     },

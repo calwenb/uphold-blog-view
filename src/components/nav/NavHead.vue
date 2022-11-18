@@ -124,10 +124,10 @@ export default {
           router.push('/blog');
           break;
         case "2":
-          console.log(1);
+          router.push('/tag');
           break;
         case "3":
-          console.log(1);
+          router.push('/tag');
           break;
         case "4":
           console.log(1);
