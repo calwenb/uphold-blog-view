@@ -151,7 +151,7 @@ export default {
       this.$refs[formName].resetFields();
     }
   },
-  created() {
+  mounted() {
     let account = this.$route.params.account;
     if (account !== undefined) {
       this.ruleForm.account = account;

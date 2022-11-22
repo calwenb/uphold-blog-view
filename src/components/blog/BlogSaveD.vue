@@ -19,6 +19,13 @@
       <el-form-item label="标题">
         <el-input v-model="form.title"></el-input>
       </el-form-item>
+      <el-form-item label="类型">
+        <el-select v-model="form.typeId" placeholder="请选择">
+          <el-option
+            v-for="t in typeList" :key="t.id" :label="t.value" :value="t.id">
+          </el-option>
+        </el-select>
+      </el-form-item>
 
       <el-form-item label="标签">
         <el-autocomplete
@@ -49,7 +56,6 @@ import eventBus from "../../js/eventBus";
 import axios from "../../js/axios";
 import global from "../../js/global";
 import {errorMsg, successMsg} from "../../js/comm/comm";
-import {Axios} from "axios";
 
 export default {
   name: "BlogSaveD",
@@ -62,9 +68,11 @@ export default {
       dialogImageUrl: "",
       dialogVisible: false,
       tagEnum: [],
+      typeList: [],
     }
   },
-  created() {
+  mounted() {
+    this.getTypeList();
     eventBus.$on("BlogSaveD", data => {
       this.form = data;
       this.show = true;
@@ -72,13 +80,17 @@ export default {
     });
   },
   methods: {
+    getTypeList() {
+      axios.get(global.SERVER + "/types/list").then(rs => {
+        this.typeList = rs.data;
+      })
+    },
     handleSelect(item) {
       console.log(item);
     },
     querySearch(queryStr, cb) {
       var tagEnum = this.tagEnum;
       var results = queryStr ? tagEnum.filter(this.createFilter(queryStr)) : tagEnum;
-      console.log(results)
       cb(results);
     },
     createFilter(queryStr) {

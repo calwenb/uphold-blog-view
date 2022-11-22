@@ -52,7 +52,7 @@ export default {
       }
     }
   },
-  created() {
+  mounted() {
     let id = this.$route.params.id;
     if (id !== undefined) {
       this.data.id = id;

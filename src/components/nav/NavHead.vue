@@ -4,7 +4,7 @@
 
     <el-menu default-active="1" mode="horizontal" @select="handleSelect">
       <el-menu-item index="0">
-        <el-image class="pointer logo" :src="logoSrc" @click="$router.push('/movie')"/>
+        <el-image class="pointer logo" :src="logoSrc" @click="$router.push('/blog')"/>
       </el-menu-item>
       <el-menu-item index="1">首页</el-menu-item>
       <el-menu-item index="2">标签</el-menu-item>
@@ -118,7 +118,6 @@ export default {
   },
   methods: {
     handleSelect(key, keyPath) {
-      console.log(key)
       switch (key) {
         case "1":
           router.push('/blog');
@@ -127,7 +126,7 @@ export default {
           router.push('/tag');
           break;
         case "3":
-          router.push('/tag');
+          router.push('/type');
           break;
         case "4":
           console.log(1);

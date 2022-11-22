@@ -6,11 +6,11 @@ import Miss from "../view/error/404"
 import Repwd from "../view/login/Repwd";
 import Test from "../view/test/Test";
 import Index from "../view";
-import movieIndex from "../view/model/movie/MovieIndex";
 import blogIndex from "../view/model/blog/BlogIndex";
 import blogDetail from "../view/model/blog/BlogDetail";
 import blogEdit from "../view/model/blog/BlogEdit";
 import TagList from "../view/model/blog/TagList";
+import Type from "../view/model/type/Type";
 
 Vue.use(VueRouter);
 export default new VueRouter({
@@ -61,17 +61,11 @@ export default new VueRouter({
           path: "/tag",
           component: TagList,
         },
-
-      ]
-    },
-    {
-      path: "/movie",
-      component: Index,
-      children: [
         {
-          path: "/mv",
-          component: movieIndex
+          path: "/type",
+          component: Type,
         },
+
       ]
     },
     {

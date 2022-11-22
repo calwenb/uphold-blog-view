@@ -91,7 +91,7 @@ export default {
       logoSrc: logoL,
     }
   },
-  created() {},
+  mounted() {},
 
   methods: {},
 }

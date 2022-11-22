@@ -61,7 +61,7 @@ export default {
       user: {},
     }
   },
-  created() {
+  mounted() {
     eventBus.$on("userInfo", data => {
       this.user = data;
       this.show = true;

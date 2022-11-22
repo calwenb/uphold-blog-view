@@ -37,7 +37,7 @@ export default {
       uploadUrl: global.SERVER + "/files/pars-content",
     }
   },
-  created() {
+  mounted() {
     let id = this.$route.params.id;
     if (id !== undefined) {
       this.form.id = id;

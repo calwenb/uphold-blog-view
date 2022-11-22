@@ -57,7 +57,7 @@ export default {
       newPassword: '',
     }
   },
-  created() {
+  mounted() {
     eventBus.$on("userUpdate", data => {
       this.form = data;
       this.userShow = true;
