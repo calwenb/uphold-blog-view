@@ -71,8 +71,7 @@ export default {
         this.data = rs.data;
       })
     },
-  }
-
+  },
 }
 </script>
 

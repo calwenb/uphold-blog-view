@@ -1,20 +1,19 @@
 <template>
   <div>
-
     <el-button @click="saveShow=true" icon="el-icon-edit" circle></el-button>
 
-    <el-collapse @change="getBlog" accordion>
-      <el-collapse-item v-for="(t,i) in list" :title="t.value" :name="t.id">
-        <blog-list/>
-      </el-collapse-item>
-    </el-collapse>
+    <el-tabs @tab-click="getBlog" tab-position="left" style="height: 200px;">
+      <el-tab-pane v-for="t in list" :label="t.value" :name="t.id">
+        <div class="main">
+          <blog-list/>
+        </div>
+      </el-tab-pane>
+    </el-tabs>
 
     <el-dialog
       title="保存"
       :visible.sync="saveShow"
       append-to-body>
-
-
       <span>值：</span>
       <el-input v-model="form.value"></el-input>
       <span>公开</span>
@@ -23,7 +22,6 @@
         <el-button type="primary" @click="save">确 定</el-button>
         <el-button @click="saveShow = false">取 消</el-button>
       </span>
-
 
     </el-dialog>
 
@@ -43,7 +41,8 @@ export default {
     return {
       list: [],
       saveShow: false,
-      form: {open:true},
+      blogShow: -1,
+      form: {open: true},
     }
   },
   mounted() {
@@ -57,7 +56,12 @@ export default {
       })
       this.saveShow = false;
     },
-    getBlog(id) {
+    getBlog(tab, event) {
+      const id = tab.name;
+      if (id == '') {
+        return;
+      }
+      this.blogShow = id;
       eventBus.$emit("blogQuery", {typeId: id})
     },
     getData() {

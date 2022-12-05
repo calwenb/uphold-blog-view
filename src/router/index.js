@@ -42,6 +42,10 @@ export default new VueRouter({
       component: Index,
       children: [
         {
+          path: "/",
+          component: blogIndex,
+        },
+        {
           path: "/blog",
           component: blogIndex,
         },

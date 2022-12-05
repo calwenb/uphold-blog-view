@@ -143,7 +143,7 @@ export default {
         } else {
           that.$cookies.set("TOKEN", rs.data, "Session");
         }
-        that.$router.push({path: '/movie'});
+        that.$router.push({path: '/blog'});
       })
     },
   },
