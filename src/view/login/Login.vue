@@ -9,6 +9,7 @@
             </svg>
           </el-button>
         </router-link>
+        <el-button @click="freeLogin">游客登录</el-button>
         <el-divider direction="vertical"></el-divider>
         <router-link to="/getshare">
           <el-button circle title="获取分享照片">
@@ -106,14 +107,20 @@ export default {
   },
 
   mounted() {
-    this.getBulletin();
+    // this.getBulletin();
   },
 
   methods: {
+    freeLogin() {
+      const that = this;
+      this.axios.post(Global.SERVER + '/auths/freeLogin').then(function (rs) {
+        that.$cookies.set("TOKEN", rs.data, "Session");
+        that.$router.push('/blog');
+      })
+    },
     getBulletin() {
       let content = "项目发现缺陷，正在紧张维护中，预计9月2日 21:00恢复正常";
       comm.warnMsg(content);
-
     },
     repwd() {
       let path = "/re_pwd";

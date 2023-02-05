@@ -5,12 +5,12 @@ import Register from "../view/login/Register";
 import Miss from "../view/error/404"
 import Repwd from "../view/login/Repwd";
 import Test from "../view/test/Test";
-import Index from "../view";
 import blogIndex from "../view/model/blog/BlogIndex";
 import blogDetail from "../view/model/blog/BlogDetail";
 import blogEdit from "../view/model/blog/BlogEdit";
 import TagList from "../view/model/blog/TagList";
 import Type from "../view/model/type/Type";
+import Index from "../view/Index";
 
 Vue.use(VueRouter);
 export default new VueRouter({

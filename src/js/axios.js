@@ -14,7 +14,7 @@ axios.interceptors.request.use(function (config) {
   let token = VueCookies.get("TOKEN");
   if (token != null) {
     config.headers.common = {
-      'Authorization': token
+      'Authorization': 'Bearer ' + token
     }
   }
   return config;
